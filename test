@@ -45,4 +45,12 @@ def index():
     # Generate the confusion matrix image
     image_base64 = generate_confusion_matrix(true_labels, predicted_labels)
 
+---
+
+import numpy as np
+
+# Example true labels and predicted labels (replace with your actual data)
+true_labels = np.array([0, 1, 1, 0, 2, 2, 1])
+predicted_labels = np.array([0, 1, 0, 0, 2, 1, 1])
+
     return render_template('confusion_matrix.html', image=image_base64)
