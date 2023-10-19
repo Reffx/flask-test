@@ -1,83 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+from sklearn.metrics import roc_curve, auc
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Build Model Overview</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 50px;
-        }
+def generate_auc_plot(fpr, tpr):
+    # Compute the AUC score
+    roc_auc = auc(fpr, tpr)
 
-        h1, h2 {
-            color: #333;
-        }
+    # Create a Matplotlib figure and plot the ROC curve
+    plt.figure(figsize=(8, 6))
+    plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (AUC = {roc_auc:.2f})')
+    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.legend(loc='lower right')
 
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 30px;
-        }
+    # Convert the Matplotlib figure to a BytesIO object
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
 
-        .step {
-            flex: 1;
-            margin: 0 10px;
-            padding: 40px 20px;
-            background-color: #ffffff;
-            border: 1px solid #e0e0e0;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .icon {
-            font-size: 50px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        button {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: #333;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #555;
-        }
-    </style>
-</head>
-
-<body>
-
-    <h1>Overview of the process</h1>
-    <h2>Build Model</h2>
-
-    <div class="container">
-        <div class="step">
-            <div class="icon">📤</div> <!-- Representing the upload icon -->
-            <button>Upload data</button>
-        </div>
-
-        <div class="step">
-            <div class="icon">⚙️</div> <!-- Representing the preprocess icon -->
-            <button>Preprocess data</button>
-        </div>
-
-        <div class="step">
-            <div class="icon">💡</div> <!-- Representing the train model icon -->
-            <button>Train model</button>
-        </div>
-    </div>
-
-</body>
-
-</html>
+    return image_base64
