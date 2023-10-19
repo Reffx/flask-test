@@ -1,23 +1,19 @@
+import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from io import BytesIO
+import base64
 
-def generate_feature_importance_heatmap(feature_names, importance_scores):
-    # Create a DataFrame to hold feature names and importance scores
-    importance_df = pd.DataFrame({'Feature': feature_names, 'Importance': importance_scores})
+# Mocked data for feature importance
+def createHeatmapMockedData():
+    # Generate example feature names
+    feature_names = ['Feature A', 'Feature B', 'Feature C', 'Feature D', 'Feature E']
 
-    # Sort the DataFrame by importance scores in descending order
-    importance_df = importance_df.sort_values(by='Importance', ascending=False)
+    # Generate example importance scores (you can replace these with your own values)
+    importance_scores = np.array([0.4, 0.3, 0.2, 0.15, 0.1])
 
-    # Create a heatmap
-    plt.figure(figsize=(10, 6))
-    sns.set(style="whitegrid")
-    ax = sns.barplot(x='Importance', y='Feature', data=importance_df, palette="viridis")
-    ax.set(xlabel='Importance Score', ylabel='Feature', title='Feature Importance')
-
-    # Convert the Matplotlib figure to a BytesIO object
-    buffer = BytesIO()
-    plt.savefig(buffer, format='png')
-    buffer.seek(0)
-    image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+    # Call the function to generate the heatmap
+    image_base64 = generate_feature_importance_heatmap(feature_names, importance_scores)
 
     return image_base64
