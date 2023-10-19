@@ -1,56 +1,83 @@
-# confusion_matrix_utils.py
+<!DOCTYPE html>
+<html lang="en">
 
-from sklearn.metrics import confusion_matrix
-import matplotlib.pyplot as plt
-from io import BytesIO
-import base64
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Model Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 50px;
+        }
 
-def generate_confusion_matrix(true_labels, predicted_labels):
-    # Compute the confusion matrix
-    confusion_matrix_data = confusion_matrix(true_labels, predicted_labels)
+        h1, h2 {
+            color: #333;
+        }
 
-    # Create a Matplotlib figure and plot the confusion matrix
-    plt.figure(figsize=(8, 6))
-    # Customize the plot appearance here if needed
-    plt.imshow(confusion_matrix_data, interpolation='nearest', cmap=plt.cm.Blues)
-    plt.title('Confusion Matrix')
-    plt.colorbar()
-    plt.xlabel('Predicted Labels')
-    plt.ylabel('True Labels')
-    plt.tight_layout()
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
 
-    # Convert the Matplotlib figure to a BytesIO object
-    buffer = BytesIO()
-    plt.savefig(buffer, format='png')
-    buffer.seek(0)
-    image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+        .step {
+            flex: 1;
+            margin: 0 10px;
+            padding: 40px 20px;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-    return image_base64
+        .icon {
+            font-size: 50px;
+            color: #666;
+            margin-bottom: 20px;
+        }
 
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
----
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
 
+<body>
 
-from flask import Flask, render_template
-from confusion_matrix_utils import generate_confusion_matrix  # Import the function
+    <h1>Overview of the process</h1>
+    <h2>Build Model</h2>
 
-app = Flask(__name__)
+    <div class="container">
+        <div class="step">
+            <div class="icon">📤</div> <!-- Representing the upload icon -->
+            <button>Upload data</button>
+        </div>
 
-@app.route('/')
-def index():
-    # Generate the confusion matrix (replace this with your actual data)
-    true_labels = ...  # Your true labels
-    predicted_labels = ...  # Your predicted labels
+        <div class="step">
+            <div class="icon">⚙️</div> <!-- Representing the preprocess icon -->
+            <button>Preprocess data</button>
+        </div>
 
-    # Generate the confusion matrix image
-    image_base64 = generate_confusion_matrix(true_labels, predicted_labels)
+        <div class="step">
+            <div class="icon">💡</div> <!-- Representing the train model icon -->
+            <button>Train model</button>
+        </div>
+    </div>
 
----
+</body>
 
-import numpy as np
-
-# Example true labels and predicted labels (replace with your actual data)
-true_labels = np.array([0, 1, 1, 0, 2, 2, 1])
-predicted_labels = np.array([0, 1, 0, 0, 2, 1, 1])
-
-    return render_template('confusion_matrix.html', image=image_base64)
+</html>
