@@ -1,19 +1,25 @@
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from io import BytesIO
-import base64
+def generate_feature_importance_heatmap(feature_names, importance_scores):
+    # Create a DataFrame to hold feature names and importance scores
+    importance_df = pd.DataFrame(importance_scores, columns=feature_names)
 
-# Mocked data for feature importance
-def createHeatmapMockedData():
-    # Generate example feature names
-    feature_names = ['Feature A', 'Feature B', 'Feature C', 'Feature D', 'Feature E']
+    # Create a heatmap
+    plt.figure(figsize=(10, 6))
+    sns.set(style="whitegrid")
+    sns.heatmap(importance_df, annot=True, fmt='.2f', cmap="YlGnBu", cbar=False, linewidths=0.5)
+    plt.title('Feature Importance Heatmap')
 
-    # Generate example importance scores (you can replace these with your own values)
-    importance_scores = np.array([0.4, 0.3, 0.2, 0.15, 0.1])
-
-    # Call the function to generate the heatmap
-    image_base64 = generate_feature_importance_heatmap(feature_names, importance_scores)
+    # Convert the Matplotlib figure to a BytesIO object
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
 
     return image_base64
+This updated function creates a heatmap using Seaborn's sns.heatmap function. It takes feature_names and importance_scores as input and returns the base64-encoded image of the heatmap.
+
+You can call this function with your feature names and importance scores to generate a heatmap representing feature importance.
+
+
+
+
+
