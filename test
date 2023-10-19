@@ -1,17 +1,48 @@
-{% extends 'base.html' %}
+# confusion_matrix_utils.py
 
-{% block content %}
-<div class="container-fluid mt-4">
-    <div class="row">
-        <!-- Build Model Section -->
-        <div class="col-md-6">
-            {% include 'sections/build_model.html' %}
-        </div>
-        
-        <!-- Analysis Section -->
-        <div class="col-md-6">
-            {% include 'sections/analysis.html' %}
-        </div>
-    </div>
-</div>
-{% endblock %}
+from sklearn.metrics import confusion_matrix
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
+
+def generate_confusion_matrix(true_labels, predicted_labels):
+    # Compute the confusion matrix
+    confusion_matrix_data = confusion_matrix(true_labels, predicted_labels)
+
+    # Create a Matplotlib figure and plot the confusion matrix
+    plt.figure(figsize=(8, 6))
+    # Customize the plot appearance here if needed
+    plt.imshow(confusion_matrix_data, interpolation='nearest', cmap=plt.cm.Blues)
+    plt.title('Confusion Matrix')
+    plt.colorbar()
+    plt.xlabel('Predicted Labels')
+    plt.ylabel('True Labels')
+    plt.tight_layout()
+
+    # Convert the Matplotlib figure to a BytesIO object
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+
+    return image_base64
+
+
+---
+
+
+from flask import Flask, render_template
+from confusion_matrix_utils import generate_confusion_matrix  # Import the function
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    # Generate the confusion matrix (replace this with your actual data)
+    true_labels = ...  # Your true labels
+    predicted_labels = ...  # Your predicted labels
+
+    # Generate the confusion matrix image
+    image_base64 = generate_confusion_matrix(true_labels, predicted_labels)
+
+    return render_template('confusion_matrix.html', image=image_base64)
