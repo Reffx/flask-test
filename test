@@ -1,25 +1,19 @@
-def generate_feature_importance_heatmap(feature_names, importance_scores):
-    # Create a DataFrame to hold feature names and importance scores
-    importance_df = pd.DataFrame(importance_scores, columns=feature_names)
+# Define a class to manage the execution states
+class ExecutionStateManager:
+    def __init__(self):
+        self.execution_states = {
+            'is_executed_load_data': False,
+            'is_executed_preprocess': False,
+            'is_executed_train_model': False,
+            'is_executed_visualize': False
+        }
 
-    # Create a heatmap
-    plt.figure(figsize=(10, 6))
-    sns.set(style="whitegrid")
-    sns.heatmap(importance_df, annot=True, fmt='.2f', cmap="YlGnBu", cbar=False, linewidths=0.5)
-    plt.title('Feature Importance Heatmap')
+    # Getter method for an execution state
+    def get_execution_state(self, state_name):
+        return self.execution_states.get(state_name, False)
 
-    # Convert the Matplotlib figure to a BytesIO object
-    buffer = BytesIO()
-    plt.savefig(buffer, format='png')
-    buffer.seek(0)
-    image_base64 = base64.b64encode(buffer.getvalue()).decode('utf-8')
+    # Setter method for an execution state
+    def set_execution_state(self, state_name, value):
+        self.execution_states[state_name] = value
 
-    return image_base64
-This updated function creates a heatmap using Seaborn's sns.heatmap function. It takes feature_names and importance_scores as input and returns the base64-encoded image of the heatmap.
-
-You can call this function with your feature names and importance scores to generate a heatmap representing feature importance.
-
-
-
-
-
+execution_state_manager = ExecutionStateManager()
