@@ -1,0 +1,46 @@
+IPA-Aufgabe
+Titel der IPA: Verbesserung der Überwachungsfunktion für AUTHTAX-Warteschlangen
+
+Ausgangslage: Als AUTHAX-Administrator benötigen Sie eine Übersicht über alle Warteschlangen, die von AUTHTAX gespeist werden, um Ausfälle, Ausfallzeiten und Leistungsprobleme zu analysieren und zu verstehen.
+
+Detaillierte Aufgabenstellung:
+
+Story 1: Implementierung grundlegender Funktionen
+
+Ziel: Implementieren Sie grundlegende Funktionen zur Anzeige und Verwaltung der AUTHTAX-Warteschlangen in AUTHTAX.
+
+Erstellen Sie eine benutzerfreundliche grafische Benutzeroberfläche (UI) in AUTHTAX, die alle Warteschlangen auflistet, in die AUTHTAX Nachrichten sendet.
+
+Zeigen Sie für jede Warteschlange an, wie viele Nachrichten derzeit verarbeitet werden müssen.
+
+Stellen Sie sicher, dass die Listen der Warteschlangen automatisch aktualisiert werden, um Echtzeitdaten anzuzeigen.
+
+Bieten Sie die Möglichkeit, die Warteschlangen basierend auf der Anzahl der Nachrichten zu ordnen.
+
+Dokumentieren Sie Ihre Änderungen sorgfältig, einschließlich der Implementierung von Ausnahmebehandlungen.
+
+Story 2: Verbesserung mit einem Verlaufsdiagramm
+
+Ziel: Verbessern Sie die Überwachungsfunktion, indem Sie ein Historiendiagramm hinzufügen und die Datenerfassung optimieren.
+
+Implementieren Sie einen Zeitplan (Scheduler), der die aktuellen Daten aus den Warteschlangen liest und sie in einer neuen Datenbanktabelle speichert. Verwenden Sie Liquibase, um die Tabelle zu erstellen. Stellen Sie sicher, dass nicht zu viele Daten gespeichert werden, und löschen Sie alte Einträge nach 8 Stunden.
+
+Verbessern Sie die Benutzeroberfläche, indem Sie die neue Datenbanktabelle verwenden, um eine zusätzliche Ansicht hinzuzufügen. Diese Ansicht sollte den Verlauf der jeweiligen Warteschlangen anzeigen und Benutzern ermöglichen, Trends zu erkennen.
+
+Individuelle Kriterien: Ergänzen Sie sieben individuelle Kriterien zur Probe-IPA, die spezifisch für Ihre Aufgabenstellung sind.
+
+Mittel und Methoden: Nutzen Sie die vorhandene Hardware im Unternehmen für die Entwicklung. Sie dürfen nach Absprache auch Ihr persönliches Entwicklungsgerät verwenden. Frameworks sind erlaubt und erwünscht, sofern sie nicht in der Aufgabenstellung eingeschränkt sind. Als Projektmethode wird HERMES vorgeschlagen, es kann jedoch eine alternative Methode gewählt werden, wenn diese konsistent umgesetzt wird. Ein schneller Internetzugang steht zur Verfügung.
+
+Vorkenntnisse: Die erforderlichen Vorkenntnisse richten sich nach den Angaben aus der Umfrage, die vom Fachvorgesetzten rückgemeldet wurden.
+
+Vorarbeiten:
+
+Stellen Sie eine Dokumentationsvorlage bereit.
+Geben Sie eine Vorlage für einen Zeitplan.
+Neue Lerninhalte: Ergänzen Sie hier die für Sie neuen Lerninhalte, die während der Durchführung dieses Projekts erworben werden müssen.
+
+Arbeiten im letzten halben Jahr: Hier sollte aufgeführt werden, wie Ihre bisherigen Arbeiten und Erfahrungen in den letzten sechs Monaten die Durchführung dieses Projekts beeinflussen könnten.
+
+Tage an denen der IPA gearbeitet wird: Legen Sie die Anzahl der Arbeitstage während des IPA-Vorbereitungstrainings fest, exklusive der Schultage.
+
+Bitte beachten Sie, dass diese Aufgabenstellung auf Ihren Anforderungen basiert, und Sie können sie entsprechend Ihren spezifischen Bedürfnissen anpassen.
